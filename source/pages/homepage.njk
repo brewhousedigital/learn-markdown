@@ -4,20 +4,54 @@ title: "Home"
 permalink: /
 ---
 
+<style>
+	.grid-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 40px;
+		padding: 0 40px 70px 40px;
+		font-size: 20px;
+	}
 
-<div class="container">
-	<h1 class="mb-5">You are running an awesome 11ty site</h1>
+	#input {
+		height: 50vh;
+		font-family: monospace;
+		font-size: 20px;
+	}
 
-	<div class="row pb-5 border-bottom mb-5">
-		<div class="col-lg-6">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet ipsum lacus, non finibus nisi congue quis. Phasellus gravida justo id metus aliquam pretium. Proin rhoncus pretium ligula, at semper felis feugiat et. Nulla vestibulum leo ex, non molestie sem tempor vel. Integer vel accumsan dolor. Suspendisse quam quam, bibendum eu ullamcorper eget, imperdiet at felis. Quisque at ultricies odio. Etiam sollicitudin eros ut risus molestie tristique. Nam ullamcorper ut quam et mollis.</p>
-		</div><!-- end col -->
+	#output {
+		height: 50vh;
+		background-color: #fff;
+	}
+</style>
 
-		<div class="col-lg-6">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet ipsum lacus, non finibus nisi congue quis. Phasellus gravida justo id metus aliquam pretium. Proin rhoncus pretium ligula, at semper felis feugiat et. Nulla vestibulum leo ex, non molestie sem tempor vel. Integer vel accumsan dolor. Suspendisse quam quam, bibendum eu ullamcorper eget, imperdiet at felis. Quisque at ultricies odio. Etiam sollicitudin eros ut risus molestie tristique. Nam ullamcorper ut quam et mollis.</p>
-		</div><!-- end col -->
-	</div><!-- end row -->
+<h1 class="text-center display-1 mb-5 mt-5">Markdown Builder!</h1>
 
-	{# This is an example of a page component #}
-	{% include 'source/pages/page-components/latest-3-posts.njk' %}
+<div class="grid-container">
+	<div>
+		<h2>Put your code below ⬇</h2>
+		<textarea aria-label="Input your markdown here" id="input" class="form-control" placeholder=""></textarea>
+	</div>
+
+	<div>
+		<h2>And watch it show up here 🎇</h2>
+		<div id="output" class="form-control"></div>
+	</div>
 </div><!-- end container -->
+
+<p class="text-center"><a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener" class="btn btn-success">Stuck? Click here for help!</a></p>
+
+
+{# https://marked.js.org/using_advanced #}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+	let input = document.getElementById("input");
+	let output = document.getElementById("output");
+
+	input.addEventListener("input", function() {
+		console.log(marked(this.value))
+		output.innerHTML = marked(this.value);
+	})
+
+</script>
